@@ -131,13 +131,6 @@ footer a:hover {
   padding: 9px 15px;
   border-radius: 7px;
 }
-.hero {
-  position: relative;
-  min-height: clamp(510px, 42vw, 655px);
-  display: grid;
-  grid-template-columns: 1fr 1.06fr;
-  align-items: center;
-}
 .hero-copy {
   z-index: 1;
   padding: 46px 0 54px;
@@ -209,112 +202,6 @@ h2 span {
 .primary:hover {
   background: #d5c0ff;
   transform: translateY(-2px);
-}
-.module {
-  position: relative;
-  isolation: isolate;
-  background: var(--bg);
-  align-self: stretch;
-  display: grid;
-  place-items: center;
-  min-width: 0;
-}
-.hardware {
-  position: relative;
-  width: min(96%, 565px);
-  aspect-ratio: 1;
-  mix-blend-mode: lighten;
-  transform: rotate(-5deg) scaleY(0.86);
-  z-index: 1;
-}
-.plate {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  inset: 0;
-  display: block;
-}
-.cap {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 30%,
-    87% 37.5%,
-    85% 40.8%,
-    54% 57.2%,
-    50% 58.6%,
-    46% 57.3%,
-    15% 40.1%,
-    14% 37%,
-    0 30%
-  );
-  transform: translateY(calc(var(--explode, 0) * -30px));
-}
-.wafer {
-  clip-path: polygon(
-    0 30%,
-    14% 37%,
-    15% 40.1%,
-    46% 57.3%,
-    50% 58.6%,
-    54% 57.2%,
-    85% 40.8%,
-    87% 37.5%,
-    100% 30%,
-    100% 44%,
-    87% 53%,
-    54% 72.7%,
-    50% 74%,
-    46% 73%,
-    12% 53.3%,
-    0 45%
-  );
-}
-.base {
-  clip-path: polygon(
-    0 45%,
-    12% 53.3%,
-    46% 73%,
-    50% 74%,
-    54% 72.7%,
-    87% 53%,
-    100% 44%,
-    100% 100%,
-    0 100%
-  );
-  transform: translateY(calc(var(--explode, 0) * 28px));
-}
-.dot-field {
-  position: absolute;
-  inset: 3% -3%;
-  background: radial-gradient(#736593 1px, transparent 1.2px) 0 0/18px 18px;
-  opacity: 0.51;
-  mask-image: radial-gradient(
-    ellipse at center,
-    #000 19%,
-    #0009 54%,
-    transparent 74%
-  );
-}
-.module figcaption {
-  position: absolute;
-  bottom: 5%;
-  display: flex;
-  gap: 9px;
-  align-items: center;
-  color: #a7a4b8;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.085em;
-}
-.cross {
-  color: var(--accent);
-  font-size: 0.96rem;
-}
-.module figcaption i {
-  width: 16px;
-  height: 1px;
-  background: #5e596e;
 }
 .section {
   border-top: 1px solid var(--line);
@@ -537,25 +424,6 @@ h2 {
   align-items: center;
   gap: 9px;
 }
-.pipes {
-  display: flex;
-  justify-content: center;
-  height: 35px;
-}
-.pipes i {
-  width: 30%;
-  height: 20px;
-  margin-top: 15px;
-  border-top: 2px solid #a9e9c9;
-  border-left: 2px solid #a9e9c9;
-  border-radius: 5px 0 0;
-}
-.pipes i + i {
-  border: 0;
-  border-top: 2px dashed #58796c;
-  border-right: 2px dashed #58796c;
-  border-radius: 0 5px 0 0;
-}
 .endpoints {
   display: flex;
   justify-content: space-between;
@@ -568,21 +436,6 @@ h2 {
   font-size: 0.73rem;
   padding: 6px 10px;
   background: #142d27;
-}
-.sentinel-visual.failed .pipes i:first-child {
-  border-color: #58796c;
-  border-style: dashed;
-  border-width: 2px 0 0 2px;
-}
-.sentinel-visual.failed .pipes i + i {
-  border-color: #a9e9c9;
-  border-style: solid;
-}
-.failed .endpoints span {
-  opacity: 0.65;
-}
-.failed .endpoints span + span {
-  opacity: 1;
 }
 .books-visual {
   display: flex;
@@ -650,7 +503,7 @@ h2 {
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
-.stack-grid > div {
+.stack-grid > a {
   border-top: 1px solid var(--line);
   padding: 26px 0 0;
 }
@@ -703,20 +556,10 @@ footer {
     }
   }
 }
-@media (min-width: 1550px) {
-  .hero {
-    min-height: 665px;
-  }
-  .hardware {
-    width: 570px;
-  }
-}
+
 @media (max-width: 850px) {
   .wrap {
     width: 90%;
-  }
-  .hero {
-    min-height: 495px;
   }
   .header {
     gap: 24px;
@@ -733,9 +576,6 @@ footer {
   .intro {
     font-size: 1rem;
     max-width: 30ch;
-  }
-  .module figcaption {
-    font-size: 0.62rem;
   }
   .feature {
     grid-template-columns: 1fr 1fr;
@@ -781,12 +621,6 @@ footer {
     width: 18px;
     height: 18px;
   }
-  .hero {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-    min-height: 0;
-  }
   .hero-copy {
     padding: 48px 0 0;
   }
@@ -804,22 +638,6 @@ footer {
   .primary {
     margin-top: 20px;
     padding: 12px 17px;
-  }
-  .module {
-    height: clamp(205px, 62vw, 300px);
-    margin: 8px 0 18px;
-  }
-  .hardware {
-    width: min(80%, 300px);
-    height: 100%;
-    aspect-ratio: auto;
-  }
-  .plate {
-    height: 100%;
-    object-fit: fill;
-  }
-  .module figcaption {
-    bottom: 0;
   }
   .section-head {
     align-items: flex-start;
@@ -846,7 +664,7 @@ footer {
   .stack-grid {
     gap: 16px;
   }
-  .stack-grid > div {
+  .stack-grid > a {
     display: grid;
     grid-template-columns: 30px 1fr;
     align-items: center;
@@ -890,8 +708,880 @@ footer {
     animation: none !important;
     transition: none !important;
   }
-  .cap,
-  .base {
+}
+
+/* The static composition also serves compact, touch and reduced-motion layouts. */
+:root {
+  --nav-height: 68px;
+  --wire: #af8eda;
+  --ease: cubic-bezier(0.2, 0.72, 0.23, 1);
+}
+.header {
+  height: var(--nav-height);
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  background: var(--bg);
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax -1px);
+}
+.page-progress {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--read, 0));
+}
+.header nav a {
+  position: relative;
+}
+.header nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 4px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s;
+}
+.header nav a:is(:hover, :focus-visible, [aria-current="location"])::after {
+  transform: scaleX(1);
+}
+.skip {
+  position: fixed;
+  z-index: 20;
+}
+.section,
+.project {
+  scroll-margin-top: calc(var(--nav-height) + 15px);
+}
+.hero {
+  position: relative;
+}
+.scene {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+.hero-copy {
+  position: relative;
+  z-index: 3;
+}
+.module {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  isolation: isolate;
+  padding: 22px 0 38px;
+}
+.dot-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(#777084 1px, transparent 1.1px) 0 0/20px 20px;
+  opacity: 0.38;
+  mask-image: radial-gradient(ellipse, #000 16%, transparent 74%);
+}
+.dot-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #958bad3a 1px, transparent 1px) 0 0/40px 40px,
+    linear-gradient(#958bad3a 1px, transparent 1px) 0 0/40px 40px;
+  opacity: var(--grid, 0);
+}
+.camera {
+  width: min(95%, 460px);
+  perspective: 1000px;
+  position: relative;
+}
+.chip-tilt {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.32s var(--ease);
+}
+.hardware {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  transform: rotate(-3deg);
+}
+.plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.23s;
+}
+.cap {
+  transform: translateY(var(--cap-y, -2%)) rotate(var(--cap-angle, 0deg));
+}
+.wafer {
+  transform: translateY(var(--wafer-y, 0%));
+}
+.base {
+  transform: translateY(var(--base-y, 2%));
+}
+.module figcaption,
+.scene-rail,
+.annotation button span,
+.document-flow,
+#route-state,
+.stack-grid > a > span {
+  font: 500 0.72rem var(--mono);
+}
+.module figcaption {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #c6c4d0;
+  position: absolute;
+  bottom: 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.ready-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c3a4ff;
+  box-shadow: 0 0 8px #b386ff6b;
+}
+.phase-copy,
+.wiring,
+.scene-rail {
+  display: none;
+}
+.annotations {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 22px 0 36px;
+}
+.annotation {
+  border-top: 1px solid #53465f;
+  padding: 11px 0;
+  min-width: 0;
+  position: relative;
+}
+.annotation button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  color: var(--text);
+  padding: 0;
+  background: none;
+}
+.annotation button:disabled {
+  cursor: default;
+}
+.annotation button span {
+  display: block;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+.annotation b {
+  display: block;
+  margin: 7px 0 4px;
+  font-size: clamp(0.95rem, 1.24vw, 1.18rem);
+  line-height: 1.28;
+  letter-spacing: -0.025em;
+  font-weight: 580;
+}
+.annotation p,
+.annotation small {
+  font-size: 0.87rem;
+  line-height: 1.45;
+  color: var(--muted);
+  display: block;
+}
+.annotation small {
+  color: #e6d9fa;
+  margin-top: 5px;
+}
+.js .annotation small {
+  visibility: hidden;
+}
+.js .annotation[data-current] small {
+  visibility: visible;
+}
+.scene[data-inspect="cap"] .plate:not(.cap),
+.scene[data-inspect="wafer"] .plate:not(.wafer),
+.scene[data-inspect="base"] .plate:not(.base) {
+  opacity: 0.45;
+}
+.scene[data-inspect="cap"] .cap,
+.scene[data-inspect="wafer"] .wafer,
+.scene[data-inspect="base"] .base {
+  filter: drop-shadow(0 0 3px #c49bfc80);
+}
+/* Sticky positioning supplies pin spacing. JS owns one scroll-position timeline. */
+.cinematic .hero {
+  height: calc(100svh - var(--nav-height) + 160svh);
+}
+.cinematic .scene {
+  position: sticky;
+  top: var(--nav-height);
+  height: calc(100svh - var(--nav-height));
+  min-height: 0;
+  display: block;
+  isolation: isolate;
+}
+.cinematic .hero-copy {
+  position: absolute;
+  left: 0;
+  top: 48%;
+  width: 49%;
+  padding: 0;
+  transform: translateY(calc(-50% - var(--copy-rise, 0px)));
+  opacity: var(--copy, 1);
+}
+.cinematic .module {
+  overflow: clip;
+  container-type: inline-size;
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  pointer-events: none;
+}
+.cinematic .dot-field {
+  inset: 0;
+  transform: translateX(var(--field-x, 19%));
+  mask-image: radial-gradient(
+    ellipse 44% 68% at center,
+    #000 28%,
+    transparent 84%
+  );
+}
+.cinematic .hero {
+  clip-path: inset(0 -4.5vw);
+}
+.cinematic .camera {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: min(40%, 53svh, 560px);
+  transform: translate(calc(-50% + var(--travel, 25cqw)), -50%)
+    scale(var(--zoom, 1)) rotateX(var(--pitch, 0deg));
+  opacity: var(--presence, 1);
+  pointer-events: auto;
+}
+.cinematic .hardware::after {
+  content: "";
+  position: absolute;
+  left: 38%;
+  top: 20%;
+  width: 24%;
+  height: 16%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #c68cff77, transparent 70%);
+  opacity: var(--light, 0);
+  transform: translateY(var(--symbol-shift, 0px));
+  pointer-events: none;
+}
+.cinematic .module figcaption {
+  left: 75%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  opacity: var(--copy, 1);
+}
+.cinematic .phase-copy {
+  position: absolute;
+  left: 0;
+  top: 8%;
+  display: block;
+  width: 37%;
+  pointer-events: none;
+  opacity: 0;
+}
+.phase-copy > p + p {
+  font-size: clamp(1.45rem, 2.5vw, 2.55rem);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  margin-top: 11px;
+  text-wrap: balance;
+}
+.cinematic .activation {
+  opacity: var(--activation, 0);
+  clip-path: inset(0 0 var(--act-mask, 100%) 0);
+}
+.cinematic .integration {
+  top: 37%;
+  opacity: var(--integration, 0);
+  clip-path: inset(0 0 var(--int-mask, 100%) 0);
+}
+.cinematic .annotations {
+  display: contents;
+  margin: 0;
+}
+.cinematic .annotation {
+  position: absolute;
+  width: 23%;
+  z-index: 4;
+  opacity: var(--label, 0);
+  border-top: 1px solid #61516f;
+  padding: 10px 0 0;
+}
+.cinematic .annotation:nth-child(1) {
+  top: 25%;
+  left: 0;
+}
+.cinematic .annotation:nth-child(2) {
+  top: 43%;
+  right: 0;
+}
+.cinematic .annotation:nth-child(3) {
+  top: 66%;
+  left: 0;
+}
+.cinematic .annotation[inert] {
+  pointer-events: none;
+}
+.cinematic .scene-rail {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #beb9ca;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}
+.rail-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rail-title i {
+  width: 13px;
+  height: 9px;
+  border: 1px solid var(--accent);
+  transform: skewY(-16deg);
+}
+.rail-cue {
+  margin-left: auto;
+}
+.rail-meter {
+  height: 3px;
+  width: 86px;
+  background: #35313c;
+  position: relative;
+}
+.rail-meter::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(var(--playhead, 0.02));
+}
+.cinematic .wiring {
+  position: absolute;
+  display: block;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+  fill: none;
+  stroke: var(--wire);
+  stroke-width: 1;
+}
+.guides {
+  stroke-dasharray: 2 6;
+  opacity: var(--guide, 0);
+}
+.signal {
+  stroke: #ccb3ff;
+  stroke-width: 2;
+  stroke-dasharray: 0.075 0.925;
+  stroke-dashoffset: var(--packet, 1);
+  opacity: var(--guide, 0);
+}
+.leaders path,
+.output-trace {
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--draw, 1);
+}
+.leaders circle {
+  fill: var(--accent);
+  stroke: #16121b;
+}
+.output-trace {
+  stroke-dashoffset: var(--output, 1);
+}
+.work-heading {
+  overflow: hidden;
+  padding: 0 0 0.07em;
+}
+.work-heading > span {
+  display: block;
+  color: var(--text);
+}
+.work-heading em {
+  font-style: normal;
+  color: var(--accent);
+}
+.project {
+  transition:
+    border-color 0.23s,
+    box-shadow 0.23s;
+}
+.project:is(:hover, :focus-within) {
+  border-color: #675379;
+  box-shadow: 0 6px 22px #0002;
+}
+.project .icon,
+.about .icon,
+.primary .icon {
+  transition: transform 0.22s var(--ease);
+}
+.source:hover .icon,
+.about a:hover .icon,
+.primary:hover .icon {
+  transform: translateY(-2px);
+}
+.primary {
+  translate: var(--mx, 0px) var(--my, 0px);
+}
+.document-flow {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  color: #493559;
+  font-size: 0.68rem;
+}
+.document-flow i {
+  height: 1px;
+  width: 25px;
+  background: #7b678c;
+  position: relative;
+}
+.document-flow i::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #493059;
+}
+.study-visual {
+  padding: 36px 0 21px;
+}
+.flash-card:hover,
+.flash-card:focus-within {
+  outline: 1px solid #fffe;
+}
+.routes {
+  width: 100%;
+  height: 42px;
+  display: block;
+  fill: none;
+  stroke: #98dabc;
+  stroke-width: 1.4;
+}
+.routes #backup-path,
+.failed .routes #primary-path {
+  stroke: #63877a;
+  stroke-dasharray: 3 3;
+}
+.failed .routes #backup-path {
+  stroke: #a4e5c9;
+  stroke-dasharray: none;
+}
+.routes .packet {
+  stroke: #e4fff4;
+  stroke-width: 2.8;
+  stroke-dasharray: 5 200;
+}
+.backup-packet,
+.failed .primary-packet {
+  opacity: 0;
+}
+.failed .backup-packet {
+  opacity: 1;
+}
+#route-state {
+  position: relative;
+  font-size: 0.68rem;
+  color: #c2e6d6;
+  text-align: center;
+}
+.failed .endpoints span:first-child {
+  color: #ffc6bb;
+  border-color: #ac726a;
+}
+.failed .endpoints span + span {
+  opacity: 1;
+}
+.book {
+  transition:
+    translate 0.4s var(--ease),
+    rotate 0.4s var(--ease);
+}
+.books-visual {
+  perspective: 800px;
+}
+.stack-grid {
+  position: relative;
+  gap: 0;
+}
+.stack-grid > a {
+  position: relative;
+  padding: 25px 18px 16px;
+  border-top: 1px solid #665470;
+  transition: background 0.2s;
+}
+.stack-grid > a::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: -4px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  transform: rotate(45deg);
+}
+.stack-grid > a > span {
+  display: block;
+  color: var(--accent);
+  margin-top: 15px;
+}
+.stack-grid > a:is(:hover, :focus-visible) {
+  background: #19151e;
+}
+.stack-grid .icon {
+  transition: transform 0.2s;
+}
+.stack-grid > a:is(:hover, :focus-visible) .icon {
+  transform: translateY(-3px);
+}
+.about {
+  position: relative;
+}
+.about .textlink {
+  position: relative;
+  border-bottom: 1px solid #726084;
+}
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0 52% 0 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 25px,
+    #3e344420 25px 26px
+  );
+  mask-image: linear-gradient(90deg, #000, transparent);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .books-visual:hover .one {
+    translate: -6px 2px;
+    rotate: -3deg;
+  }
+  .books-visual:hover .two {
+    translate: 0 -7px;
+    rotate: y -9deg;
+  }
+  .books-visual:hover .three {
+    translate: 6px 1px;
+    rotate: 3deg;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cinematic .scene[data-stage="standby"].in-view .hardware {
+    animation: float 5s ease-in-out infinite alternate;
+  }
+  .scene.in-view .ready-dot {
+    animation: status-in 0.8s var(--ease) both;
+  }
+  .scene.in-view[data-stage="standby"] .chip-tilt {
+    animation: power-on 0.7s var(--ease) both;
+  }
+  .on-screen .packet {
+    animation: route-packet 1.8s linear infinite;
+  }
+  .on-screen .document-flow i::after {
+    animation: document-packet 2.1s ease-in-out infinite;
+  }
+  .on-screen .document-flow i:nth-of-type(2)::after {
+    animation-delay: 0.5s;
+  }
+  .reveal .book {
+    animation: book-in 0.65s var(--ease) backwards;
+  }
+  .reveal .book.two {
+    animation-delay: 0.1s;
+  }
+  .reveal .book.three {
+    animation-delay: 0.2s;
+  }
+  .reveal .flash-card {
+    animation: book-in 0.68s var(--ease) backwards;
+  }
+  .work-heading.reveal > span {
+    animation: heading-in 0.7s var(--ease) both;
+  }
+  .about.reveal p:not(.eyebrow) {
+    animation: lines-in 0.8s var(--ease) backwards;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
+  .about.reveal p:nth-child(2) {
+    animation-delay: 0.12s;
+  }
+  .about.reveal::before {
+    animation: paper-in 1.2s var(--ease);
+  }
+  @keyframes float {
+    from {
+      translate: 0 -1px;
+    }
+    to {
+      translate: 0 3px;
+    }
+  }
+  @keyframes power-on {
+    from {
+      opacity: 0.83;
+      scale: 0.96;
+      translate: 0 7px;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes status-in {
+    from {
+      opacity: 0.2;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes route-packet {
+    to {
+      stroke-dashoffset: -205;
+    }
+  }
+  @keyframes document-packet {
+    0%,
+    10% {
+      left: 0;
+      opacity: 0;
+    }
+    25%,
+    75% {
+      opacity: 1;
+    }
+    90%,
+    100% {
+      left: 95%;
+      opacity: 0;
+    }
+  }
+  @keyframes book-in {
+    from {
+      opacity: 0.4;
+      translate: 0 13px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes heading-in {
+    from {
+      transform: translateY(96%);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes paper-in {
+    from {
+      background-position-y: 12px;
+    }
+    to {
+      background-position-y: 0;
+    }
+  }
+}
+.paused *,
+.paused *::before,
+.paused *::after {
+  animation-play-state: paused !important;
+}
+@media (max-width: 850px) {
+  .annotations {
+    gap: 16px;
+  }
+  .annotation b {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 650px) {
+  :root {
+    --nav-height: 60px;
+  }
+  .scene {
+    display: block;
+  }
+  .hero-copy {
+    padding-top: 36px;
+  }
+  .module {
+    padding: 0 0 25px;
+  }
+  .camera {
+    width: min(78%, 278px);
+  }
+  .annotations {
+    display: block;
+    margin: 8px 0 22px;
+  }
+  .annotation {
+    padding: 12px 0;
+  }
+  .annotation:last-child {
+    border-bottom: 1px solid #53465f;
+  }
+  .js .annotation small {
+    display: none;
+  }
+  .js .annotation[data-current] small {
+    display: block;
+  }
+  .annotation button {
+    min-height: 42px;
+  }
+  .annotation b {
+    margin-top: 3px;
+  }
+  .stack-grid > a {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 4px 12px;
+    padding: 18px 12px;
+  }
+  .stack-grid > a > span {
+    grid-column: 2;
+    margin-top: 4px;
+  }
+  .stack-grid > a::before {
+    left: 22px;
+  }
+  .about::before {
+    inset: 0 0 auto;
+    height: 90px;
+  }
+}
+@media (max-height: 480px) {
+  :root {
+    --nav-height: 50px;
+  }
+  .header {
+    height: 50px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip-tilt,
+  .hardware {
     transform: none;
+  }
+  .primary {
+    translate: none;
+  }
+}
+
+.cinematic {
+  --handoff: clamp(120px, 21svh, 210px);
+}
+.cinematic #work {
+  padding-top: clamp(30px,3vw,42px);
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  margin-top: calc(-1 * var(--handoff));
+}
+.cinematic .scene-rail {
+  opacity: calc(1 - var(--exit, 0));
+  translate: 0 calc(-1 * var(--handoff) * var(--exit, 0));
+}
+.cinematic .wafer {
+  filter: brightness(var(--wafer-bright, 1));
+}
+@property --line-ink {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .about.reveal p:not(.eyebrow) {
+    mask-image: linear-gradient(
+      to bottom,
+      #000 var(--line-ink),
+      transparent calc(var(--line-ink) + 6%)
+    );
+  }
+  @keyframes lines-in {
+    from {
+      --line-ink: 14%;
+      translate: 0 6px;
+    }
+    to {
+      --line-ink: 100%;
+      translate: 0 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .annotation small {
+    display: block;
+    visibility: visible;
+  }
+}
+
+.stack-bus {
+  position: absolute;
+  left: 22px;
+  top: -12px;
+  width: 66.6667%;
+  height: 14px;
+  fill: none;
+  stroke: #a88bc5;
+  pointer-events: none;
+}
+.stack-bus path {
+  vector-effect: non-scaling-stroke;
+}
+@media (max-width: 650px) {
+  .stack-bus {
+    display: none;
   }
 }

@@ -17,8 +17,9 @@
       type="font/woff2"
       crossorigin
     />
+    <link rel="preload" as="style" href="./style.css" />
+    <script src="./script.js"></script>
     <link rel="stylesheet" href="./style.css" />
-    <script src="./script.js" defer></script>
   </head>
   <body id="top">
     <a class="skip" href="#main">Skip to content</a>
@@ -53,6 +54,7 @@
       </symbol>
     </svg>
     <header class="wrap header">
+      <div class="page-progress" aria-hidden="true"></div>
       <a class="brand" href="#top"
         ><svg class="logo icon" aria-hidden="true"><use href="#code" /></svg
         >Deepak Rai</a
@@ -68,55 +70,143 @@
     </header>
     <main id="main">
       <section class="hero wrap" aria-labelledby="title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="dash"></span> Software portfolio</p>
-          <h1 id="title">Full-stack<br />developer<span>.</span></h1>
-          <p class="intro">
-            I’m Deepak. I build web applications and AI tools, from the
-            interface you touch to the systems underneath.
-          </p>
-          <a class="primary" href="#work"
-            ><svg class="icon" aria-hidden="true"><use href="#layers" /></svg
-            >Explore my work</a
-          >
-        </div>
-        <figure
-          class="module"
-          aria-label="Exploded illustration of a three-layer computing module"
-        >
-          <div class="dot-field"></div>
-          <div class="hardware" aria-hidden="true">
-            <img
-              class="plate base"
-              fetchpriority="high"
-              src="./assets/compute-module.webp"
-              width="1050"
-              height="1050"
-              alt=""
-            /><img
-              class="plate wafer"
-              src="./assets/compute-module.webp"
-              width="1050"
-              height="1050"
-              alt=""
-            /><img
-              class="plate cap"
-              src="./assets/compute-module.webp"
-              width="1050"
-              height="1050"
-              alt=""
-            />
+        <div class="scene">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="dash"></span> Software portfolio</p>
+            <h1 id="title">Full-stack<br />developer<span>.</span></h1>
+            <p class="intro">
+              I’m Deepak. I build web applications and AI tools, from the
+              interface you touch to the systems underneath.
+            </p>
+            <a class="primary" href="#work"
+              ><svg class="icon" aria-hidden="true"><use href="#layers" /></svg
+              >Explore my work</a
+            >
           </div>
-          <figcaption>
-            <span class="cross">+</span> Exploded view <i></i> Compute module
-          </figcaption>
-        </figure>
+          <figure
+            class="module"
+            aria-label="The Compute Core, an exploded view of three engineering layers"
+          >
+            <div class="dot-field" aria-hidden="true"></div>
+            <div class="camera">
+              <div class="chip-tilt">
+                <div class="hardware" aria-hidden="true">
+                  <img
+                    class="plate base"
+                    src="./assets/core-base.webp"
+                    srcset="
+                      ./assets/core-base-540.webp 540w,
+                      ./assets/core-base.webp     900w
+                    "
+                    sizes="(max-width: 650px) min(78vw, 278px), (max-width: 959px) 44vw, min(40vw, 53vh, 560px)"
+                    width="900"
+                    height="900"
+                    alt=""
+                  />
+                  <img
+                    class="plate wafer"
+                    src="./assets/core-wafer.webp"
+                    srcset="
+                      ./assets/core-wafer-540.webp 540w,
+                      ./assets/core-wafer.webp     900w
+                    "
+                    sizes="(max-width: 650px) min(78vw, 278px), (max-width: 959px) 44vw, min(40vw, 53vh, 560px)"
+                    width="900"
+                    height="900"
+                    alt=""
+                  />
+                  <img
+                    class="plate cap"
+                    src="./assets/core-cap.webp"
+                    srcset="
+                      ./assets/core-cap-540.webp 540w,
+                      ./assets/core-cap.webp     900w
+                    "
+                    sizes="(max-width: 650px) min(78vw, 278px), (max-width: 959px) 44vw, min(40vw, 53vh, 560px)"
+                    fetchpriority="high"
+                    width="900"
+                    height="900"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <figcaption>
+              <span class="ready-dot"></span> System ready
+            </figcaption>
+          </figure>
+          <div class="phase-copy activation">
+            <p class="eyebrow">01 / Core activation</p>
+            <p>Every experience begins with a system.</p>
+          </div>
+          <div class="phase-copy integration">
+            <p class="eyebrow">System integrated</p>
+            <p>From interface to infrastructure.</p>
+          </div>
+          <svg class="wiring" aria-hidden="true">
+            <g class="guides">
+              <path />
+              <path />
+            </g>
+            <g class="signal">
+              <path pathLength="1" />
+              <path pathLength="1" />
+            </g>
+            <g class="leaders">
+              <path pathLength="1" />
+              <path pathLength="1" />
+              <path pathLength="1" />
+              <circle r="3" />
+              <circle r="3" />
+              <circle r="3" />
+            </g>
+            <path class="output-trace" pathLength="1" />
+          </svg>
+          <div
+            class="annotations"
+            role="group"
+            aria-label="Compute core engineering layers"
+          >
+            <div class="annotation" data-layer="cap">
+              <button type="button" disabled>
+                <span>01 / Interface</span><b>React · TypeScript · Vite</b>
+              </button>
+              <p>Building intuitive digital experiences.</p>
+              <small>Components give each interaction a consistent home.</small>
+            </div>
+            <div class="annotation" data-layer="wafer">
+              <button type="button" disabled>
+                <span>02 / Intelligence</span
+                ><b>Groq API · Document Context · Streaming</b>
+              </button>
+              <p>Turning information into useful interactions.</p>
+              <small>Document excerpts ground the tutor’s answers.</small>
+            </div>
+            <div class="annotation" data-layer="base">
+              <button type="button" disabled>
+                <span>03 / Systems</span
+                ><b>Node.js · Express · Go · WebSockets</b>
+              </button>
+              <p>Engineering the services underneath.</p>
+              <small
+                >APIs route requests and stream updates to the client.</small
+              >
+            </div>
+          </div>
+          <div class="scene-rail" aria-hidden="true">
+            <span class="rail-title"><i></i>The compute core</span
+            ><span class="rail-cue">Scroll to inspect</span
+            ><span class="rail-meter"></span>
+          </div>
+        </div>
       </section>
       <section id="work" class="section wrap">
         <div class="section-head">
           <div>
             <p class="eyebrow"><span class="dash"></span> Project index</p>
-            <h2>Selected work<span>.</span></h2>
+            <h2 class="work-heading">
+              <span>Selected work<em>.</em></span>
+            </h2>
           </div>
           <a
             class="textlink"
@@ -125,8 +215,12 @@
             >All repositories</a
           >
         </div>
-        <article class="feature project">
+        <article class="feature project" id="bian">
           <div class="study-visual">
+            <div class="document-flow" aria-hidden="true">
+              <span>PDF</span><i></i><span>Context</span><i></i
+              ><span>Study deck</span>
+            </div>
             <div class="orbit orbit-a"></div>
             <div class="orbit orbit-b"></div>
             <div class="flash-card">
@@ -160,9 +254,10 @@
           </div>
         </article>
         <div class="project-grid">
-          <article class="project">
+          <article class="project" id="sentinel">
             <div
               class="sentinel-visual"
+              role="group"
               aria-label="Illustration of the gateway routing traffic"
             >
               <div class="diagram">
@@ -171,14 +266,29 @@
                     <use href="#branch" /></svg
                   >Gateway
                 </div>
-                <div class="pipes"><i></i><i></i></div>
+                <svg
+                  class="routes"
+                  viewBox="0 0 200 42"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    id="primary-path"
+                    d="M100 0v10q0 5-5 5H38q-5 0-5 5v22"
+                  />
+                  <path id="backup-path" d="M100 0v10q0 5 5 5h57q5 0 5 5v22" />
+                  <use href="#primary-path" class="packet primary-packet" />
+                  <use href="#backup-path" class="packet backup-packet" />
+                </svg>
                 <div class="endpoints">
                   <span>Primary API</span><span>Backup API</span>
                 </div>
               </div>
               <button type="button" id="route" aria-pressed="false" hidden>
-                Simulate failover
-              </button>
+                Simulate failover</button
+              ><span id="route-state" role="status"
+                >Primary healthy · Backup on standby</span
+              >
             </div>
             <div class="project-body">
               <p class="category">Backend systems</p>
@@ -200,7 +310,7 @@
               >
             </div>
           </article>
-          <article class="project">
+          <article class="project" id="bookhaven">
             <div class="books-visual" aria-hidden="true">
               <div class="book one">
                 <span>Collected essays</span><b>Form<br />&amp; Field</b>
@@ -243,21 +353,32 @@
           </div>
         </div>
         <div class="stack-grid">
-          <div>
-            <svg class="icon" aria-hidden="true"><use href="#layers" /></svg>
-            <h3>Interface</h3>
+          <svg
+            class="stack-bus"
+            aria-hidden="true"
+            viewBox="0 0 600 14"
+            preserveAspectRatio="none"
+          >
+            <path d="M0 12h95l6-6h118l6 6h75m0 0h78l7-7h142l7 7h66" />
+          </svg>
+          <a href="#bookhaven"
+            ><svg class="icon" aria-hidden="true"><use href="#layers" /></svg>
+            <h3>Interface Engineering</h3>
             <p>React, TypeScript, Vite</p>
-          </div>
-          <div>
-            <svg class="icon" aria-hidden="true"><use href="#branch" /></svg>
-            <h3>Services</h3>
-            <p>Node.js, Express, Go, WebSockets</p>
-          </div>
-          <div>
-            <svg class="icon" aria-hidden="true"><use href="#cpu" /></svg>
-            <h3>Applied AI</h3>
+            <span>Explore BookHaven</span></a
+          >
+          <a href="#bian"
+            ><svg class="icon" aria-hidden="true"><use href="#cpu" /></svg>
+            <h3>Applied Intelligence</h3>
             <p>Groq API, document context, streaming responses</p>
-          </div>
+            <span>Explore BIAN AI</span></a
+          >
+          <a href="#sentinel"
+            ><svg class="icon" aria-hidden="true"><use href="#branch" /></svg>
+            <h3>Backend Systems</h3>
+            <p>Node.js, Express, Go, WebSockets</p>
+            <span>Explore Project Sentinel</span></a
+          >
         </div>
       </section>
       <section class="section about wrap" id="about">
