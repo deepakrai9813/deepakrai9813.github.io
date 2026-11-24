@@ -55,13 +55,14 @@
     </svg>
     <header class="wrap header">
       <div class="page-progress" aria-hidden="true"></div>
-      <a class="brand" href="#top"
-        ><svg class="logo icon" aria-hidden="true"><use href="#code" /></svg
-        >Deepak Rai</a
+      <a class="brand" href="#top" aria-label="Deepak Rai, back to top"
+        ><img src="./assets/mark.svg" width="40" height="40" alt="" /><span
+          >Deepak Rai</span
+        ></a
       >
       <nav aria-label="Primary">
-        <a href="#work">Work</a><a href="#stack">Stack</a
-        ><a href="#about">About</a>
+        <a href="#work">Work</a><a href="#notes">Notes</a
+        ><a href="#stack">Stack</a><a href="#about">About</a>
       </nav>
       <a class="profile" href="https://github.com/deepakrai9813"
         ><svg class="icon" aria-hidden="true"><use href="#github" /></svg
@@ -72,16 +73,22 @@
       <section class="hero wrap" aria-labelledby="title">
         <div class="scene">
           <div class="hero-copy">
-            <p class="eyebrow"><span class="dash"></span> Software portfolio</p>
-            <h1 id="title">Full-stack<br />developer<span>.</span></h1>
-            <p class="intro">
-              I’m Deepak. I build web applications and AI tools, from the
-              interface you touch to the systems underneath.
+            <p class="eyebrow identity">
+              Deepak Rai <i>/</i> Developer portfolio
             </p>
-            <a class="primary" href="#work"
-              ><svg class="icon" aria-hidden="true"><use href="#layers" /></svg
-              >Explore my work</a
-            >
+            <h1 id="title">Full-stack.<br /><em>Applied AI.</em></h1>
+            <p class="intro">
+              I build software from the interface to the API. My projects turn
+              PDFs into study tools, route traffic around slow services, and
+              bring bookstores online.
+            </p>
+            <div class="hero-actions">
+              <a class="primary" href="#work"
+                ><svg class="icon" aria-hidden="true">
+                  <use href="#layers" /></svg
+                >Explore my work</a
+              ><a href="#notes" class="note-shortcut">Read the notes</a>
+            </div>
           </div>
           <figure
             class="module"
@@ -89,6 +96,30 @@
           >
             <div class="dot-field" aria-hidden="true"></div>
             <div class="camera">
+              <svg
+                class="draft"
+                viewBox="-210 -210 420 420"
+                fill="none"
+                aria-hidden="true"
+              >
+                <g class="datum">
+                  <circle r="175" stroke-dasharray=".7 5" />
+                  <path
+                    d="M-192-162h12m-6-6v12m360-6h12m-6-6v12M-192 162h12m-6-6v12m360-6h12m-6-6v12"
+                  />
+                </g>
+                <g class="axes">
+                  <path
+                    d="M-186-46 0-152l186 106M-186 50 0 156l186-106M-198 0 0 111 198 0M-148-121l295 169m-295 0 295-169"
+                  />
+                </g>
+                <g class="index-arc">
+                  <path
+                    d="M0-175a175 175 0 0 1 134 62m-268 225a175 175 0 0 0 134 63"
+                  />
+                  <circle cx="0" cy="-175" r="2.6" />
+                </g>
+              </svg>
               <div class="chip-tilt">
                 <div class="hardware" aria-hidden="true">
                   <img
@@ -193,10 +224,57 @@
               >
             </div>
           </div>
-          <div class="scene-rail" aria-hidden="true">
-            <span class="rail-title"><i></i>The compute core</span
-            ><span class="rail-cue">Scroll to inspect</span
-            ><span class="rail-meter"></span>
+          <div
+            class="scene-rail"
+            role="group"
+            aria-label="Compute Core scroll chapters"
+          >
+            <span class="rail-title"><i></i>Compute Core</span>
+            <div class="chapter-stops">
+              <button
+                type="button"
+                data-seek="0"
+                data-name="standby"
+                aria-label="Jump to standby"
+              >
+                <i></i><span>Standby</span></button
+              ><button
+                type="button"
+                data-seek="0.255"
+                data-name="activation"
+                aria-label="Jump to activation"
+              >
+                <i></i><span>Activation</span></button
+              ><button
+                type="button"
+                data-seek="0.51"
+                data-name="explode"
+                aria-label="Jump to exploded view"
+              >
+                <i></i><span>Exploded view</span></button
+              ><button
+                type="button"
+                data-seek="0.715"
+                data-name="architecture"
+                aria-label="Jump to architecture"
+              >
+                <i></i><span>Architecture</span></button
+              ><button
+                type="button"
+                data-seek="0.875"
+                data-name="reassemble"
+                aria-label="Jump to integration"
+              >
+                <i></i><span>Integration</span></button
+              ><button
+                type="button"
+                data-seek="0.96"
+                data-name="transition"
+                aria-label="Jump to selected work"
+              >
+                <i></i><span>Selected work</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -247,10 +325,14 @@
               <li>Express</li>
               <li>Groq</li>
             </ul>
-            <a class="source" href="https://github.com/deepakrai9813/AI_PROJECT"
-              ><svg class="icon" aria-hidden="true"><use href="#code" /></svg
-              >View source</a
-            >
+            <div class="project-links">
+              <a
+                class="source"
+                href="https://github.com/deepakrai9813/AI_PROJECT"
+                ><svg class="icon" aria-hidden="true"><use href="#code" /></svg
+                >View source</a
+              ><a href="#note-stream">Engineering note</a>
+            </div>
           </div>
         </article>
         <div class="project-grid">
@@ -302,12 +384,15 @@
                 <li>React</li>
                 <li>WebSockets</li>
               </ul>
-              <a
-                class="source"
-                href="https://github.com/deepakrai9813/project-sentinel"
-                ><svg class="icon" aria-hidden="true"><use href="#code" /></svg
-                >View source</a
-              >
+              <div class="project-links">
+                <a
+                  class="source"
+                  href="https://github.com/deepakrai9813/project-sentinel"
+                  ><svg class="icon" aria-hidden="true">
+                    <use href="#code" /></svg
+                  >View source</a
+                ><a href="#note-recover">Engineering note</a>
+              </div>
             </div>
           </article>
           <article class="project" id="bookhaven">
@@ -335,14 +420,134 @@
                 <li>Node.js</li>
                 <li>Vite</li>
               </ul>
-              <a
-                class="source"
-                href="https://github.com/deepakrai9813/BookHaven"
-                ><svg class="icon" aria-hidden="true"><use href="#code" /></svg
-                >View source</a
-              >
+              <div class="project-links">
+                <a
+                  class="source"
+                  href="https://github.com/deepakrai9813/BookHaven"
+                  ><svg class="icon" aria-hidden="true">
+                    <use href="#code" /></svg
+                  >View source</a
+                ><a href="#note-order">Engineering note</a>
+              </div>
             </div>
           </article>
+        </div>
+      </section>
+      <section class="notebook" id="notes" aria-labelledby="notes-title">
+        <div class="notebook-grid wrap">
+          <div class="notebook-spine">
+            <div class="notebook-title">
+              <p class="eyebrow">
+                <span class="dash"></span> From the repositories
+              </p>
+              <h2 id="notes-title">Engineering<br /><em>notes.</em></h2>
+            </div>
+            <figure class="source-reader" aria-hidden="true">
+              <figcaption>
+                <svg class="icon"><use href="#code" /></svg
+                ><span class="reader-file"></span>
+              </figcaption>
+              <div class="reader-content"></div>
+              <div class="reader-rule"><i></i></div>
+            </figure>
+          </div>
+          <div class="entries">
+            <article
+              id="note-stream"
+              class="entry"
+              data-file="src/lib/api.js"
+              data-line="60"
+            >
+              <p class="entry-meta"><span>BIAN AI</span> / Streaming</p>
+              <h3>Show the answer as it arrives.</h3>
+              <p>
+                A tutor’s answer can be several paragraphs long. BIAN reads the
+                response stream a chunk at a time. It holds on to incomplete
+                lines so a network chunk ending halfway through a message can be
+                joined to the next one.
+              </p>
+              <p>
+                Once a complete event contains text, the client adds it to the
+                reply and calls <code>onDelta</code>. Stop a request early and
+                the student can still read what has arrived.
+              </p>
+              <pre
+                class="excerpt"
+              ><code><span>const delta = json.choices?.[0]?.delta?.content;</span>
+<span>if (typeof delta === "string" &amp;&amp; delta) {</span>
+<span>  full += delta;</span>
+<span>  onDelta?.(delta);</span>
+<span>}</span></code></pre>
+              <a
+                class="code-ref"
+                href="https://github.com/deepakrai9813/AI_PROJECT/blob/00abeb939585e279f5474ae61731cb8735b08471/src/lib/api.js#L39-L65"
+                >Read the streaming client</a
+              >
+            </article>
+            <article
+              id="note-recover"
+              class="entry"
+              data-file="circuitbreaker.go"
+              data-line="30"
+            >
+              <p class="entry-meta"><span>Project Sentinel</span> / Recovery</p>
+              <h3>Give recovery a trial run.</h3>
+              <p>
+                Sending every request back to a recovering service can overwhelm
+                it again. Sentinel’s circuit breaker has a half-open state
+                between sending traffic to the backup and fully reopening the
+                primary route.
+              </p>
+              <p>
+                The default configuration waits five seconds before probing. It
+                allows one trial request at a time and looks for two successes
+                before closing the circuit.
+              </p>
+              <pre class="excerpt"><code><span>return Config{</span>
+<span>    FailureThreshold:    5,</span>
+<span>    SuccessThreshold:    2,</span>
+<span>    Timeout:             5 * time.Second,</span>
+<span>    MaxHalfOpenRequests: 1,</span>
+<span>}</span></code></pre>
+              <a
+                class="code-ref"
+                href="https://github.com/deepakrai9813/project-sentinel/blob/07c010685146aa83c661c34db414d44b0eb059cf/backend/internal/circuitbreaker/circuitbreaker.go#L29-L36"
+                >Read the circuit breaker</a
+              >
+            </article>
+            <article
+              id="note-order"
+              class="entry"
+              data-file="server/routes/orders.js"
+              data-line="42"
+            >
+              <p class="entry-meta"><span>BookHaven</span> / Checkout</p>
+              <h3>Price the order on the server.</h3>
+              <p>
+                A cart can sit open while the catalog changes. At checkout,
+                BookHaven looks up each book again and checks the requested
+                quantity against the available stock.
+              </p>
+              <p>
+                The order route calculates each line from the catalog price and
+                records the title, price, and quantity on the order. That gives
+                the receipt its own copy of the purchase details.
+              </p>
+              <pre
+                class="excerpt"
+              ><code><span>const itemTotal = book.price * item.quantity;</span>
+<span>subtotal += itemTotal;</span>
+<span> </span>
+<span>validatedItems.push({</span>
+<span>  bookId: book.id,</span>
+<span>  title: book.title,</span></code></pre>
+              <a
+                class="code-ref"
+                href="https://github.com/deepakrai9813/BookHaven/blob/860330d645e8fe286732a8c7154adedc084effb1/server/routes/orders.js#L25-L53"
+                >Read the order route</a
+              >
+            </article>
+          </div>
         </div>
       </section>
       <section id="stack" class="section wrap">
@@ -404,7 +609,10 @@
       </section>
     </main>
     <footer class="wrap">
-      <span>© Deepak Rai</span><a href="#top">Back to top</a>
+      <span class="colophon"
+        ><img src="./assets/mark.svg" alt="" width="27" height="27" />© Deepak
+        Rai</span
+      ><a href="#top">Back to top</a>
     </footer>
   </body>
 </html>

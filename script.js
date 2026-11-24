@@ -62,7 +62,7 @@ function mount() {
     link,
     section: $(link.hash),
   }));
-  const railCue = $(".rail-cue"),
+  const chapterStops = $$(".chapter-stops button"),
     progressBar = $(".page-progress");
   const navHeight = $(".header"),
     pointerQuery = () => fine.matches && !reduced.matches;
@@ -118,10 +118,71 @@ function mount() {
     });
   }
 
+  const entries = $$(".entry");
+  const reader = $(".source-reader");
+  const editorial = matchMedia("(min-width: 900px) and (min-height: 620px)");
+  let displayedEntry = -1;
+  let markedLine = -1;
+  const sourcePages = entries.map((entry) => {
+    const excerpt = $(".excerpt", entry).cloneNode(true);
+    const start = Number(entry.dataset.line);
+    $$("code > span", excerpt).forEach((line, i) => {
+      line.dataset.line = start + i;
+    });
+    return excerpt;
+  });
+  function renderNotebook(y) {
+    if (
+      !geometry.showReader ||
+      y + innerHeight < geometry.entryStarts[0] ||
+      y > geometry.noteEnd
+    )
+      return;
+    const marker = y + innerHeight * 0.5;
+    const starts = geometry.entryStarts;
+    let index = 0;
+    while (index + 1 < starts.length && marker >= starts[index + 1]) index++;
+    const end = starts[index + 1] ?? geometry.noteEnd;
+    const fraction = clamp(
+      (marker - starts[index]) / Math.max(1, end - starts[index]),
+    );
+    if (displayedEntry !== index) {
+      displayedEntry = index;
+      entries.forEach((entry, i) =>
+        entry.toggleAttribute("data-reading", i === index),
+      );
+      $(".reader-file", reader).textContent = entries[index].dataset.file;
+      $(".reader-content", reader).replaceChildren(sourcePages[index]);
+      markedLine = -1;
+    }
+    const lines = sourcePages[index].firstElementChild.children;
+    const current = Math.min(
+      lines.length - 1,
+      Math.floor(fraction * lines.length),
+    );
+    if (current !== markedLine) {
+      for (const line of lines)
+        line.toggleAttribute("data-highlight", line === lines[current]);
+      markedLine = current;
+    }
+    put(reader, "--reading", fraction);
+  }
+
+  for (const stop of chapterStops) {
+    listen(stop, "click", () => {
+      if (!cinematic || !geometry) return;
+      scrollTo({
+        top: geometry.start + Number(stop.dataset.seek) * geometry.length,
+        behavior: "smooth",
+      });
+    });
+  }
   function measure() {
     cinematic = useDesktopScene();
     html.classList.toggle("cinematic", cinematic);
     html.classList.add("js");
+    const showReader = editorial.matches && !reduced.matches;
+    html.classList.toggle("has-reader", showReader);
     const height = scene.offsetHeight,
       width = scene.clientWidth,
       header = navHeight.offsetHeight;
@@ -134,6 +195,16 @@ function mount() {
       chip: camera.offsetWidth,
       length: Math.max(1, hero.offsetHeight - height),
       total: Math.max(1, html.scrollHeight - innerHeight),
+      showReader,
+      entryStarts: entries.map(
+        (entry) => entry.getBoundingClientRect().top + scrollY,
+      ),
+      noteEnd: $("#notes").getBoundingClientRect().bottom + scrollY,
+      visuals: $$(".study-visual,.books-visual").map((el) => ({
+        el,
+        top: el.getBoundingClientRect().top + scrollY,
+        height: el.offsetHeight,
+      })),
       labelY: labels.map((label) => label.offsetTop),
       labelWidth: labels[0].offsetWidth,
       sections: nav.map(
@@ -141,6 +212,7 @@ function mount() {
       ),
       compactStart: $(".module").getBoundingClientRect().top + scrollY,
     };
+    camera.style.removeProperty("--dial-angle");
     hardware.style.removeProperty("--cap-y");
     hardware.style.removeProperty("--base-y");
     if (!cinematic) {
@@ -156,16 +228,17 @@ function mount() {
     refreshInspection();
   }
 
-  function drawWires(p, spread, zoom, travel, draw, exit) {
+  function drawWires(lift, lower, zoom, travel, rise, draw, exit) {
     const { width: w, height: h, chip, labelY, labelWidth } = geometry;
     const x = w / 2 + travel,
-      y = h * 0.47,
+      y = h * 0.47 + rise,
       size = chip * zoom,
-      sep = spread * size;
+      upperGap = size * 0.18 * lift,
+      lowerGap = size * 0.155 * lower;
     const points = [
-      [x - size * 0.24, y - size * 0.23 - sep],
+      [x - size * 0.24, y - size * 0.23 - upperGap],
       [x + size * 0.31, y + size * 0.035],
-      [x - size * 0.25, y + size * 0.18 + sep * 0.86],
+      [x - size * 0.25, y + size * 0.18 + lowerGap],
     ];
     for (let i = 0; i < 3; i++) {
       const [px, py] = points[i],
@@ -184,7 +257,7 @@ function mount() {
     }
     for (let i = 0; i < 2; i++) {
       const gx = x + (i ? 1 : -1) * size * 0.355;
-      const d = `M${gx} ${y - size * 0.1 - sep * 0.86}v${size * 0.06 + sep * 0.86}m0 ${size * 0.09}v${size * 0.07 + sep * 0.86}`;
+      const d = `M${gx} ${y - size * 0.1 - upperGap}v${size * 0.06 + upperGap}m0 ${size * 0.09}v${size * 0.07 + lowerGap}`;
       guides[i].setAttribute("d", d);
       pulses[i].setAttribute("d", d);
     }
@@ -200,19 +273,29 @@ function mount() {
     previous = p;
     if (!cinematic) {
       const motion = reduced.matches ? 0 : p;
-      put(hardware, "--cap-y", -2 - 4 * motion + "%");
-      put(hardware, "--base-y", 2 + 3 * motion + "%");
+      put(hardware, "--cap-y", -2 - 8 * segment(motion, 0.1, 0.69) + "%");
+      put(hardware, "--base-y", 2 + 6 * segment(motion, 0.35, 0.9) + "%");
+      put(camera, "--dial-angle", motion * 22 + "deg");
       return;
     }
-    const stage = stages.filter(([, start]) => p >= start).at(-1)[0];
+    const stageIndex = stages.findLastIndex(([, start]) => p >= start);
+    const [stage, start] = stages[stageIndex];
+    const next = stages[stageIndex + 1]?.[1] ?? 1;
+    const chapterProgress = Math.min(
+      1,
+      (stageIndex + clamp((p - start) / (next - start))) / (stages.length - 1),
+    );
     const activate = segment(p, 0.15, 0.32),
       separation = segment(p, 0.3, 0.55) * (1 - segment(p, 0.76, 0.89));
     const assembly = segment(p, 0.76, 0.9),
       exit = segment(p, 0.9, 1);
     const travel = geometry.width * (0.25 * (1 - activate) + 0.17 * assembly);
-    const zoom = 1 + 0.085 * activate - 0.24 * exit;
-    const spread = 0.18 * separation,
-      intro = 1 - segment(p, 0.15, 0.27);
+    const lift = segment(p, 0.29, 0.46) * (1 - segment(p, 0.815, 0.9));
+    const lower = segment(p, 0.37, 0.55) * (1 - segment(p, 0.755, 0.855));
+    const arc = Math.sin(activate * Math.PI);
+    const zoom =
+      1.18 + 0.065 * activate + 0.035 * arc - 0.155 * separation - 0.31 * exit;
+    const intro = 1 - segment(p, 0.15, 0.27);
     const activation = segment(p, 0.18, 0.26) * (1 - segment(p, 0.48, 0.56));
     const integration = segment(p, 0.81, 0.9) * (1 - 0.35 * exit);
     const draw = labels.map(
@@ -242,10 +325,15 @@ function mount() {
       "--copy-rise": 24 * (1 - intro) + "px",
       "--field-x": (travel / geometry.width) * 75 + "%",
       "--grid": activate * (1 - exit),
-      "--cap-y": -100 * spread + "%",
-      "--base-y": 86 * spread + "%",
+      "--cap-y": -18 * lift + "%",
+      "--base-y": 15.5 * lower + "%",
       "--wafer-y": -1.2 * separation + "%",
-      "--cap-angle": -0.8 * separation + "deg",
+      "--cap-angle": -2.1 * lift + 0.9 * lower + "deg",
+      "--roll": -3 * arc + 1.6 * (lift - lower) + "deg",
+      "--arc-lift": -geometry.chip * 0.055 * arc + "px",
+      "--dial-angle": activate * 25 + separation * 22 + assembly * 16 + "deg",
+      "--dial-ink": 0.68 - 0.43 * separation - 0.17 * exit,
+
       "--exit": exit,
       "--wafer-bright": 1 + 0.12 * separation,
       "--guide": separation * 0.83,
@@ -253,28 +341,33 @@ function mount() {
       "--light":
         Math.sin(Math.PI * segment(p, 0.17, 0.34)) +
         0.8 * Math.sin(Math.PI * segment(p, 0.82, 0.96)),
-      "--symbol-shift": -geometry.chip * spread + "px",
+      "--symbol-shift": -geometry.chip * 0.18 * lift + "px",
       "--presence": 1 - 0.33 * exit,
       "--activation": activation,
       "--act-mask": (1 - activation) * 100 + "%",
       "--integration": integration,
       "--int-mask": (1 - segment(p, 0.81, 0.9)) * 100 + "%",
-      "--playhead": Math.max(0.02, p),
+      "--playhead": chapterProgress,
     };
     for (const [key, value] of Object.entries(style)) put(scene, key, value);
     if (scene.dataset.stage !== stage) {
       scene.dataset.stage = stage;
-      railCue.textContent = {
-        standby: "Scroll to inspect",
-        activation: "Core activation",
-        explode: "Exploded view",
-        architecture: "Inspect a layer",
-        reassemble: "System integration",
-        transition: "Selected work",
-      }[stage];
+      for (const stop of chapterStops) {
+        if (stop.dataset.name === stage)
+          stop.setAttribute("aria-current", "step");
+        else stop.removeAttribute("aria-current");
+      }
       if (stage !== "standby") resetTilt();
     }
-    drawWires(p, spread, zoom, travel, draw, exit);
+    drawWires(
+      lift,
+      lower,
+      zoom,
+      travel,
+      -geometry.chip * 0.055 * arc,
+      draw,
+      exit,
+    );
   }
 
   function tick() {
@@ -290,17 +383,34 @@ function mount() {
       ? clamp((y - g.start) / g.length)
       : clamp((y + innerHeight * 0.7 - g.compactStart) / Math.max(1, g.chip));
     renderHero(progress);
+    renderNotebook(y);
+    if (!reduced.matches) {
+      for (const { el, top, height } of g.visuals) {
+        if (y + innerHeight >= top - 50 && y <= top + height + 50) {
+          const reveal = segment(
+            y + innerHeight,
+            top,
+            top + Math.min(height * 0.85, innerHeight * 0.48),
+          );
+          put(el, "--unfold", 1 - reveal);
+        }
+      }
+    }
     put(progressBar, "--read", clamp(y / g.total));
     const marker = y + g.header + 42;
     let active = -1;
     g.sections.forEach((start, i) => {
       if (marker >= start) active = i;
     });
-    if (y >= g.total - 2)
+    if (y >= g.total - 2) {
+      const target = nav.findIndex(({ link }) => link.hash === location.hash);
       active =
-        location.hash === "#stack" && g.sections[1] < y + innerHeight
-          ? 1
+        target >= 0 &&
+        g.sections[target] >= y - 2 &&
+        g.sections[target] < y + innerHeight
+          ? target
           : nav.length - 1;
+    }
     nav.forEach(({ link }, i) => {
       if (i === active) link.setAttribute("aria-current", "location");
       else link.removeAttribute("aria-current");
@@ -400,7 +510,7 @@ function mount() {
   }
   listen(window, "scroll", schedule, { passive: true });
   listen(window, "resize", refresh);
-  for (const mq of [desktop, reduced, fine])
+  for (const mq of [desktop, reduced, fine, editorial])
     listen(mq, "change", () => {
       resetTilt();
       refresh();
